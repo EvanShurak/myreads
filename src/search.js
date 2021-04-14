@@ -43,7 +43,7 @@ you don't find a specific author or title. Every search is limited by search ter
 
     render() {
         const getShelf = (id) => {
-            const b = this.props.currentBooks.find(x => x.id == `${id}`)
+            const b = this.props.currentBooks.find(x => x.id === `${id}`)
             let returnValue = "none"
             if (b !== undefined) {
                 returnValue = b.shelf
