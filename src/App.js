@@ -13,23 +13,28 @@ class App extends React.Component {
         books: []
     };
 
-
-    componentDidMount() {
+    getBooks = () => {
         BooksAPI.getAll()
             .then((books) => {
                 this.setState(() => ({
                     books
                 }))
             })
+    }
+    componentDidMount() {
+        this.getBooks();
     };
 
     upDateBook = (book) => {
-        console.log(book.id, book.shelf)
+
         BooksAPI.update(book, book.shelf)
-            .then((book) => {
-                this.setState((prevState) => ({
-                    books: prevState.books, book
-                }))
+            .then(() => {
+                console.log(book)
+                this.getBooks();
+                // this.setState((prevState) => ({
+                //     books: prevState.books, book
+                // }))
+
             })
     };
 
