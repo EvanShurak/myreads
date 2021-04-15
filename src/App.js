@@ -1,7 +1,7 @@
 
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Switch } from 'react-router-dom'
 import './App.css'
 
 import Search from "./search"
@@ -46,27 +46,32 @@ class App extends React.Component {
         ]
         return (
             <div>
-                <Route exact path="/" render={() => (
-                    <div className="list-books">
+                <Switch>
 
-                        <div className="list-books-title">
-                            <h1>MyReads</h1>
-                        </div>
-                        <div className="list-books-content">
-                            {Sections.map((section) => (
-                                <BookShelf key={section.index} Section={section} Books={this.state.books} onUpdate={this.upDateBook} ></BookShelf>
-                            ))}
-                        </div>
-                        <Link to="/search"
-                            className="open-search"
-                        ><button ></button></Link>
-                    </div>
-                )} />
+                    <Route exact path="/" render={() => (
+                        <div className="list-books">
 
-                <Route exact path="/search" render={() => (
-                    <Search currentBooks={this.state.books} onUpdate={this.upDateBook}></Search>
-                )}
-                />
+                            <div className="list-books-title">
+                                <h1>MyReads</h1>
+                            </div>
+                            <div className="list-books-content">
+                                {Sections.map((section) => (
+                                    <BookShelf key={section.index} Section={section} Books={this.state.books} onUpdate={this.upDateBook} ></BookShelf>
+                                ))}
+                            </div>
+                            <Link to="/search"
+                                className="open-search"
+                            ><button ></button></Link>
+                        </div>
+                    )} />
+
+                    <Route exact path="/search" render={() => (
+                        <Search currentBooks={this.state.books} onUpdate={this.upDateBook}></Search>
+                    )}
+                    />
+                    <Route render={() => <h1>404: page not found</h1>} />
+                </Switch>
+
 
             </div >
         )
